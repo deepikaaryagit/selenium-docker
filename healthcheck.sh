@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
-# Environment Variables
-# HUB_HOST
-# BROWSER
-# MODULE
 
+#!/bin/bash 
+# My first shell script 
+echo "Hello $USER" 
+echo "Today is $(date)" 
+echo "Bye for now" 
 echo "***********Checking if the hub is ready - $HUB_HOST"
 
 while [ "$( curl -s http://$HUB_HOST:4444/wd/hub/status | jq -r .value.ready )" != "true" ]
