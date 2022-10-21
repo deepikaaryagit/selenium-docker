@@ -2,21 +2,21 @@ pipeline {
     // master executor should be set to 0
     agent any
     stages {
-        stage('Build Jar') {
+        stage('Build Source Jar and Tests Jar') {
             steps {
                    bat "mvn clean package -DskipTests"
             }
         }
         stage('Build Image') {
             steps {
-                    bat "docker build -t=deepikaarya/selenium-dockerhub-newimage ."
+                    bat "docker build -t=deepikaarya/mydocker-myimage ."
             }
         }
         stage('Push Image') {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     bat "docker login --username=${user} --password=${pass}"
-			        bat "docker push deepikaarya/selenium-dockerhub-newimage:latest"
+			        bat "docker push deepikaarya/mydocker-myimage:latest"
 			    }                           
             }
         }
